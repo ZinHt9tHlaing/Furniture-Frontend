@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Furniture-Frontend
+
+A modern Next.js 16 app built with TypeScript, Tailwind CSS 4, shadcn UI components, React Query, and dark mode support.
+
+## Project Overview
+
+This repository contains a frontend practice project scaffolded with Next.js and customized for component-driven UI development. It includes:
+
+- Next.js App Router with server and client components
+- TypeScript with strict checking
+- Tailwind CSS 4 and shadcn utility components
+- Light/dark theme switching via `next-themes`
+- React Query for data fetching state management
+- A small collection of reusable UI primitives under `src/components/ui`
+- Google font optimization via `next/font`
+
+## Key Features
+
+- `app/layout.tsx`: Root layout with global providers and theme setup
+- `src/components/theme-provider.tsx`: Theme wrapper for `next-themes`
+- `src/providers/ReactQueryProvider.tsx`: React Query setup and cache provider
+- `src/lib/utils.ts`: `cn()` utility for class name composition via `clsx` + `tailwind-merge`
+- `src/app/globals.css`: Tailwind imports, shadcn styles, and theme tokens
+- Reusable UI components in `src/components/ui`
+
+## Built With
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- shadcn UI
+- Zustand
+- TanStack Query
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+ recommended
+- npm, pnpm, or Yarn
+
+### Installation
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+or with pnpm:
+
+```bash
+pnpm install
+```
+
+### Environment Setup
+
+If the app requires environment-specific configuration, create a `.env.local` file in the project root. Example:
+
+```env
+# .env.local
+NEXT_PUBLIC_API_URL=https://api.example.com
+NEXT_PUBLIC_ANALYTICS_ID=your-analytics-id
+```
+
+Next.js automatically loads `.env.local` during development. Do not commit sensitive values to source control.
+
+### Run Locally
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the app at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build for Production
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then start the production server locally:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `npm run dev` — start development server
+- `npm run build` — create production build
+- `npm start` — run production server
+- `npm run lint` — run ESLint checks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/` — Next.js App Router pages and layouts
+- `src/components/` — reusable UI components and shared providers
+- `src/lib/` — utility helpers
+- `src/providers/` — application-level providers like React Query
+- `public/` — static assets
+
+## Notes
+
+- `app/page.tsx` currently renders a placeholder `HomePage` component.
+- `app/layout.tsx` configures fonts, theme, React Query, and global page structure.
+- `globals.css` includes theme token definitions, Tailwind imports, and base styling.
+
+## Backend
+
+See the [backend repository](https://github.com/ZinHt9tHlaing/server-practice) for the API source and setup instructions.
