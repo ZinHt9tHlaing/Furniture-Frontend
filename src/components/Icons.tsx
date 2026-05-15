@@ -12,8 +12,9 @@ import {
   GearIcon,
   ExitIcon,
   TrashIcon,
+  HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
-import { AlignLeft, SendHorizontal } from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -35,7 +36,7 @@ export const Icons = {
     </svg>
   ),
   home: HomeIcon,
-  menu: AlignLeft,
+  menu: HamburgerMenuIcon,
   paperPlane: SendHorizontal,
   exclamation: ExclamationTriangleIcon,
   arrowLeft: ArrowLeftIcon,
