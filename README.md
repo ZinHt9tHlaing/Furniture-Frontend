@@ -14,15 +14,6 @@ This repository contains a frontend practice project scaffolded with Next.js and
 - A small collection of reusable UI primitives under `src/components/ui`
 - Google font optimization via `next/font`
 
-## Key Features
-
-- `app/layout.tsx`: Root layout with global providers and theme setup
-- `src/components/theme-provider.tsx`: Theme wrapper for `next-themes`
-- `src/providers/ReactQueryProvider.tsx`: React Query setup and cache provider
-- `src/lib/utils.ts`: `cn()` utility for class name composition via `clsx` + `tailwind-merge`
-- `src/app/globals.css`: Tailwind imports, shadcn styles, and theme tokens
-- Reusable UI components in `src/components/ui`
-
 ## Built With
 
 - Next.js 16
@@ -32,6 +23,20 @@ This repository contains a frontend practice project scaffolded with Next.js and
 - shadcn UI
 - Zustand
 - TanStack Query
+
+## Project Structure
+
+- `src/app/` — Next.js App Router pages and layouts
+- `src/components/` — reusable UI components and shared providers
+- `src/lib/` — utility helpers
+- `src/providers/` — application-level providers like React Query
+- `public/` — static assets
+
+## Notes
+
+- `app/page.tsx` currently renders a placeholder `HomePage` component.
+- `app/layout.tsx` configures fonts, theme, React Query, and global page structure.
+- `globals.css` includes theme token definitions, Tailwind imports, and base styling.
 
 ## Getting Started
 
@@ -53,7 +58,6 @@ or with pnpm:
 ```bash
 pnpm install
 ```
-
 ### Environment Setup
 
 If the app requires environment-specific configuration, create a `.env.local` file in the project root. Example:
@@ -61,7 +65,6 @@ If the app requires environment-specific configuration, create a `.env.local` fi
 ```env
 # .env.local
 NEXT_PUBLIC_API_URL=https://api.example.com
-NEXT_PUBLIC_ANALYTICS_ID=your-analytics-id
 ```
 
 Next.js automatically loads `.env.local` during development. Do not commit sensitive values to source control.
@@ -98,20 +101,6 @@ npm start
 - `npm run build` — create production build
 - `npm start` — run production server
 - `npm run lint` — run ESLint checks
-
-## Project Structure
-
-- `src/app/` — Next.js App Router pages and layouts
-- `src/components/` — reusable UI components and shared providers
-- `src/lib/` — utility helpers
-- `src/providers/` — application-level providers like React Query
-- `public/` — static assets
-
-## Notes
-
-- `app/page.tsx` currently renders a placeholder `HomePage` component.
-- `app/layout.tsx` configures fonts, theme, React Query, and global page structure.
-- `globals.css` includes theme token definitions, Tailwind imports, and base styling.
 
 ## Backend
 

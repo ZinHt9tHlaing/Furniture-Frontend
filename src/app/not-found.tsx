@@ -9,14 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/Icons";
-import Header from "@/components/layouts/Header";
-import Footer from "@/components/layouts/Footer";
 import Link from "next/link";
 
-export default function ErrorPage() {
+export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col overflow-hidden">
-      <Header />
+      {/* <Header /> */}
       <main className="mx-auto my-32 flex flex-1 items-center">
         <Card className="w-87.5 max-w-md rounded-2xl py-3 shadow-lg md:w-125 lg:w-125">
           <CardHeader className="flex flex-col items-center">
@@ -45,7 +43,6 @@ export default function ErrorPage() {
           </CardFooter>
         </Card>
       </main>
-      <Footer />
     </div>
   );
 }

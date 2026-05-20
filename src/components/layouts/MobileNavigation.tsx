@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Icons } from "../Icons";
 import { siteConfig } from "@/config/site";
@@ -27,6 +28,27 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation = ({ items }: MobileNavigationProps) => {
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+
+  const query = "(min-width: 1024px)";
+
+  // check if the screen size is larger than 1024px
+  useEffect(() => {
+    const onChangeHandler = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches);
+    };
+
+    const result = matchMedia(query);
+    result.addEventListener("change", onChangeHandler);
+
+    // clean up the event listener
+    return () => result.removeEventListener("change", onChangeHandler);
+  }, [query]);
+
+  if (isDesktop) {
+    return null;
+  }
+
   return (
     <div className="lg:hidden">
       <Sheet>
@@ -42,16 +64,16 @@ const MobileNavigation = ({ items }: MobileNavigationProps) => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[70%] pt-9 pl-7">
-          <SheetClose asChild>
-            <SheetHeader>
+          <SheetHeader>
+            <SheetClose asChild>
               <Link href={"/"} className="flex items-center gap-2">
                 <Icons.logo className="size-5" aria-hidden="true" />
                 <SheetTitle>{siteConfig.name}</SheetTitle>
                 {/* sr => screen reader */}
                 <SheetDescription className="sr-only">Home</SheetDescription>
               </Link>
-            </SheetHeader>
-          </SheetClose>
+            </SheetClose>
+          </SheetHeader>
           <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-8">
             <Accordion type="multiple" className="w-[80%] border-b-2">
               <AccordionItem value="item-1">
