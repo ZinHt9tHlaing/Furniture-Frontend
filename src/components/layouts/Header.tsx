@@ -9,7 +9,7 @@ const Header = () => {
       <div className="container mx-auto flex h-16 items-center">
         <MainNavigation items={siteConfig.mainNav} />
         <MobileNavigation items={siteConfig.mainNav} />
-        <div className="mr-8 flex flex-1 items-center justify-end space-x-4 lg:mr-0">
+        <div className="mr-4 flex flex-1 items-center justify-end space-x-4 lg:mr-0">
           <ModeToggle />
         </div>
       </div>

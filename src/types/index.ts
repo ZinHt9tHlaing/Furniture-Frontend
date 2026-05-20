@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface NavItem {
   title: string;
   href?: string;
@@ -10,3 +12,36 @@ export interface NavItemWithChildren extends NavItem {
 }
 
 export type MainNavItem = NavItemWithChildren;
+
+export type Image = {
+  id: number;
+  path: string;
+};
+
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  images: (StaticImageData | string)[];
+  categoryId: string;
+  price: number;
+  discount: number;
+  rating: number;
+  inventory: number;
+  status: string;
+};
+
+export type Tag = {
+  name: string;
+};
+
+export type Post = {
+  id: string;
+  author: string;
+  title: string;
+  content: string;
+  image: StaticImageData | string;
+  body: string;
+  updated_at: string;
+  tags: string[];
+};
