@@ -10,9 +10,10 @@ import { products } from "@/data/products";
 import Title from "@/components/Title";
 import { posts } from "@/data/posts";
 import BlogCard from "@/components/blogs/BlogCard";
+import ProductCard from "@/components/products/ProductCard";
 
 // const samplePosts = posts.slice(0, 3);
-// const sampleProducts = products.slice(0, 4);
+const sampleProducts = products.slice(0, 4);
 
 const HomePage = () => {
   return (
@@ -23,7 +24,7 @@ const HomePage = () => {
           <h1 className="text-own mb-4 text-4xl font-extrabold lg:mb-8 lg:text-6xl">
             Modern Interior Design Studio
           </h1>
-          <p className="text-own mb-6 lg:mb-8">
+          <p className="text-own mb-6 lg:mb-8 px-5">
             Furniture is an essential component of any living space, providing
             functionality, comfort, and aesthetic appeal.
           </p>
@@ -52,6 +53,18 @@ const HomePage = () => {
         />
       </div>
       {products && <CarouselCard products={products} />}
+
+      {/* Featured Products */}
+      <Title
+        title="Featured Products"
+        href={"/products"}
+        sideText="View All Products"
+      />
+      <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-4 lg:px-0">
+        {sampleProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
 
       {/* Recent Blog  */}
       <Title title="Recent Blog" href="/blogs" sideText="View All Posts" />

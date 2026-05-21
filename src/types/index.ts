@@ -45,3 +45,8 @@ export type Post = {
   updated_at: string;
   tags: string[];
 };
+
+export type Category = {
+  id: string;
+  label: string;
+};

@@ -16,9 +16,9 @@ export const filterList = {
     { id: "uuid5", label: "storage" },
   ],
   categories: [
-    { id: "uuid1", label: "Wooden" },
-    { id: "uuid2", label: "Bamboo" },
-    { id: "uuid3", label: "Metal" },
+    { id: "cuid1", label: "Wooden" },
+    { id: "cuid2", label: "Bamboo" },
+    { id: "cuid3", label: "Metal" },
   ],
 };
 
