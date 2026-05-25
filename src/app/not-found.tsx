@@ -14,7 +14,6 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col overflow-hidden">
-      {/* <Header /> */}
       <main className="mx-auto my-32 flex flex-1 items-center">
         <Card className="w-87.5 max-w-md rounded-2xl py-3 shadow-lg md:w-125 lg:w-125">
           <CardHeader className="flex flex-col items-center">

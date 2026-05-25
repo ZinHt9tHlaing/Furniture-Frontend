@@ -19,6 +19,13 @@ import RatingConverter from "@/components/products/RatingConverter";
 import AddToFavorite from "@/components/products/AddToFavorite";
 import BackButton from "@/components/back-button";
 import AddToCartForm from "@/components/products/AddToCartForm";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Icons } from "@/components/Icons";
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
@@ -46,6 +53,7 @@ const ProductDetailPage = () => {
                     alt={product.name}
                     loading="eager"
                     decoding="async"
+                    preload={false}
                     className="size-full rounded-md object-cover"
                   />
                 </div>
@@ -76,6 +84,18 @@ const ProductDetailPage = () => {
 
           {/* Add To Cart Form */}
           <AddToCartForm canBuy={product?.status === "active" ? true : false} />
+
+          <Separator className="my-5" />
+
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1" className="border-none">
+              <AccordionTrigger>Description</AccordionTrigger>
+              <AccordionContent>
+                {product?.description ??
+                  "No description is available for this product."}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
