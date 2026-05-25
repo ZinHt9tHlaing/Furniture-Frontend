@@ -2,12 +2,9 @@
 
 import { useMemo } from "react";
 import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { products } from "@/data/products";
 import ProductCard from "@/components/products/ProductCard";
-import { Icons } from "@/components/Icons";
 
-import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -20,10 +17,11 @@ import { Separator } from "@/components/ui/separator";
 import { formatPrice } from "@/lib/utils";
 import RatingConverter from "@/components/products/RatingConverter";
 import AddToFavorite from "@/components/products/AddToFavorite";
+import BackButton from "@/components/back-button";
+import AddToCartForm from "@/components/products/AddToCartForm";
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
-  const navigate = useRouter();
 
   const plugin = useMemo(
     () => Autoplay({ delay: 2000, stopOnInteraction: true }),
@@ -34,14 +32,7 @@ const ProductDetailPage = () => {
 
   return (
     <div className="container mx-auto px-4 lg:px-0">
-      <Button
-        variant={"outline"}
-        onClick={() => navigate.back()}
-        className="group mt-8 mb-6 duration-200 active:ring-1 active:ring-gray-500"
-      >
-        <Icons.arrowLeft className="duration-200 group-hover:-translate-x-1" />
-        All Products
-      </Button>
+      <BackButton label="All Products" />
 
       {/* Carousel */}
       <section className="my-6 flex flex-col gap-8 md:flex-row md:gap-16">
@@ -82,6 +73,9 @@ const ProductDetailPage = () => {
             <RatingConverter ratingCount={Number(product?.rating)} />
             <AddToFavorite productId={String(product?.id)} rating={Number()} />
           </div>
+
+          {/* Add To Cart Form */}
+          <AddToCartForm canBuy={product?.status === "active" ? true : false} />
         </div>
       </section>
 

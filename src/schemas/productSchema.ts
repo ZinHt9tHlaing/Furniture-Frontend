@@ -10,3 +10,7 @@ export const productFilterSchema = z.object({
   //   message: "You have to select at least one type.",
   // }),
 });
+
+export const quantitySchema = z.object({
+  quantity: z.number().min(1, "Quantity must be at least 1"),
+});

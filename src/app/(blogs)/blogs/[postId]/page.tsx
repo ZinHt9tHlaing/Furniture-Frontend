@@ -1,6 +1,7 @@
 "use client";
 
 import { Icons } from "@/components/Icons";
+import BackButton from "@/components/back-button";
 import RichTextRenderer from "@/components/blogs/RichTextRenderer";
 import { Button } from "@/components/ui/button";
 import { posts } from "@/data/posts";
@@ -21,16 +22,8 @@ const BlogDetail = () => {
     <div className="container mx-auto px-4 lg:px-0">
       <section className="flex flex-col lg:flex-row">
         <section className="w-full lg:w-3/4 lg:pr-16">
-          <Button
-            variant={"outline"}
-            className="group mt-8 mb-6 duration-200 active:ring-1 active:ring-gray-500"
-            asChild
-          >
-            <Link href={"/blogs"}>
-              <Icons.arrowLeft className="duration-200 group-hover:-translate-x-1" />
-              All Posts
-            </Link>
-          </Button>
+          <BackButton label="All Posts" />
+
           {post ? (
             <>
               <h2 className="mb-3 text-3xl font-extrabold">{post.title}</h2>
