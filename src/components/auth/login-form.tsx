@@ -23,6 +23,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "./password-input";
 
 function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -63,6 +64,7 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
                     <FieldLabel htmlFor="phone">Phone Number</FieldLabel>
                     <Input
                       id="phone"
+                      type="tel"
                       aria-invalid={fieldState.invalid}
                       placeholder="09********"
                       autoComplete="off"
@@ -93,10 +95,10 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
                         Forgot your password?
                       </Link>
                     </div>
-                    <Input
+                    <PasswordInput
                       id="password"
-                      type="password"
                       aria-invalid={fieldState.invalid}
+                      inputMode="numeric" // show numeric keyboard on mobile
                       placeholder="*********"
                       autoComplete="off"
                       {...field}
@@ -142,17 +144,16 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
                 Continue with Google
               </Button>
             </div>
-
-            <FieldDescription className="text-center">
-              Don&apos;t have an account?{" "}
-              <Link
-                href="/register"
-                className="font-semibold underline underline-offset-4"
-              >
-                Sign up
-              </Link>
-            </FieldDescription>
           </form>
+          <FieldDescription className="text-center">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/register"
+              className="font-semibold underline underline-offset-4"
+            >
+              Sign up
+            </Link>
+          </FieldDescription>
         </CardContent>
       </Card>
     </div>

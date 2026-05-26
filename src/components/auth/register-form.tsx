@@ -23,6 +23,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "./password-input";
 
 function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -41,7 +42,10 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
   };
 
   return (
-    <div className={cn("mx-auto w-96 max-w-sm py-5 mt-20", className)} {...props}>
+    <div
+      className={cn("mx-auto mt-20 w-96 max-w-sm py-5", className)}
+      {...props}
+    >
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Sign Up</CardTitle>
@@ -64,6 +68,7 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                     <FieldLabel htmlFor="phone">Phone Number</FieldLabel>
                     <Input
                       id="phone"
+                      type="tel"
                       aria-invalid={fieldState.invalid}
                       placeholder="09********"
                       autoComplete="on"
@@ -86,10 +91,10 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                     className="space-y-1"
                   >
                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input
+                    <PasswordInput
                       id="password"
-                      type="password"
                       aria-invalid={fieldState.invalid}
+                      inputMode="numeric" // show numeric keyboard on mobile
                       placeholder="*********"
                       autoComplete="off"
                       {...field}
@@ -113,10 +118,10 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                     <FieldLabel htmlFor="confirmPassword">
                       Confirm Password
                     </FieldLabel>
-                    <Input
-                      id="confirmPassword"
-                      type="password"
+                    <PasswordInput
+                      id="password"
                       aria-invalid={fieldState.invalid}
+                      inputMode="numeric" // show numeric keyboard on mobile
                       placeholder="*********"
                       autoComplete="off"
                       {...field}
@@ -162,17 +167,16 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                 Continue with Google
               </Button>
             </div>
-
-            <FieldDescription className="text-center">
-              Already have an account?{" "}
-              <Link
-                href="/login"
-                className="font-semibold underline underline-offset-4"
-              >
-                Sign In
-              </Link>
-            </FieldDescription>
           </form>
+          <FieldDescription className="text-center">
+            Already have an account?{" "}
+            <Link
+              href="/login"
+              className="font-semibold underline underline-offset-4"
+            >
+              Sign In
+            </Link>
+          </FieldDescription>
         </CardContent>
       </Card>
     </div>
