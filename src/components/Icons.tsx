@@ -14,7 +14,7 @@ import {
   TrashIcon,
   HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, ShoppingCart } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -50,4 +50,5 @@ export const Icons = {
   gear: GearIcon,
   exit: ExitIcon,
   trash: TrashIcon,
+  cart: ShoppingCart,
 };

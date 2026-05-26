@@ -25,4 +25,30 @@ export const cartItems = [
     category: "Metal",
     subcategory: "Sleeping",
   },
+   {
+    id: "uuid3",
+    name: "Bed",
+    price: 100,
+    quantity: 1,
+    image: {
+      id: "uuid2",
+      name: "bed",
+      url: "https://img.drz.lazcdn.com/static/mm/p/c04af04b532dd0fe6b4f712612cd50f5.jpg_400x400q75.jpg_.webp",
+    },
+    category: "Metal",
+    subcategory: "Sleeping",
+  },
+      {
+    id: "uuid4",
+    name: "Bed",
+    price: 100,
+    quantity: 1,
+    image: {
+      id: "uuid2",
+      name: "bed",
+      url: "https://img.drz.lazcdn.com/static/mm/p/c04af04b532dd0fe6b4f712612cd50f5.jpg_400x400q75.jpg_.webp",
+    },
+    category: "Metal",
+    subcategory: "Sleeping",
+  },
 ];
