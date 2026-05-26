@@ -1,0 +1,7 @@
+app/layout.tsx => root layout
+app/(main)=>layout.tsx => nested layout 
+
+app/(auth)=>layout.tsx => nested layout  
+
+(main) => include header, footer and navigation
+(auth) => does not include header, footer and navigation, only login and register page
