@@ -24,8 +24,13 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./password-input";
+import { toast } from "sonner";
+import { loginAction } from "@/services/actions";
+import { useRouter } from "next/navigation";
 
 function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -34,10 +39,19 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log("values", values);
-    // form.reset();
-    // toast.success("Successfully Logged In.");
+  const { isSubmitting } = form.formState;
+
+  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+    const result = await loginAction(values);
+
+    if (!result.success) {
+      toast.error(result.error);
+      return;
+    }
+
+    form.reset();
+    toast.success(result.data.message);
+    router.push("/");
   };
 
   return (
@@ -114,17 +128,17 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
             <div className="grid gap-4">
               <Button
                 type="submit"
-                className="mt-2 w-full cursor-pointer duration-200 active:ring-1 active:ring-gray-500"
+                disabled={isSubmitting}
+                className="mt-4 w-full cursor-pointer duration-200 active:ring-1 active:ring-gray-500"
               >
-                {/* {submitting ? (
-                      <>
-                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                        <span className="animate-pulse">Submitting...</span>
-                      </>
-                    ) : (
-                      "Sign In"
-                    )} */}
-                Sign In
+                {isSubmitting ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                    <span className="animate-pulse">Submitting...</span>
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-background text-muted-foreground relative z-10 px-2">

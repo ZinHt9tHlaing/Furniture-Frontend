@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ENV } from "@/config/env";
 
-export const api = axios.create({
+// for auth
+export const authApi = axios.create({
   baseURL: ENV.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
@@ -9,7 +10,7 @@ export const api = axios.create({
   withCredentials: true, // send httpOnly cookies
 });
 
-api.interceptors.response.use(
+authApi.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -24,8 +25,8 @@ api.interceptors.response.use(
   },
 );
 
-// for auth, not include interceptors
-export const authApi = axios.create({
+// not include interceptors
+export const apiClient = axios.create({
   baseURL: ENV.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",

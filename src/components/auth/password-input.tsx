@@ -15,8 +15,7 @@ const PasswordInput = React.forwardRef<
 
   const handleOnClick = () => {
     setShowPassword((prev) => !prev);
-    };
-    console.log("showPassword",showPassword)
+  };
 
   return (
     <div className="relative">

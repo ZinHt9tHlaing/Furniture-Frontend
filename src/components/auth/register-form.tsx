@@ -137,7 +137,7 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
             <div className="grid gap-4">
               <Button
                 type="submit"
-                className="mt-2 w-full cursor-pointer duration-200 active:ring-1 active:ring-gray-500"
+                className="mt-4 w-full cursor-pointer duration-200 active:ring-1 active:ring-gray-500"
               >
                 {/* {submitting ? (
                       <>

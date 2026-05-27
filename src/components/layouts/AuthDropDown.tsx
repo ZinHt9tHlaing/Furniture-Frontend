@@ -16,12 +16,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Icons } from "../Icons";
+import { toast } from "sonner";
+import { logoutAction } from "@/services/actions";
+import { useRouter } from "next/navigation";
 
 interface AuthDropDownProps {
   user: User;
 }
 
 const AuthDropDown = ({ user }: AuthDropDownProps) => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const result = await logoutAction();
+    if (!result.success) {
+      toast.error(result.error);
+      return;
+    }
+
+    toast.success(result.data.message);
+    router.push("/login");
+  };
+
   if (!user) {
     return (
       <Button
@@ -98,7 +114,7 @@ const AuthDropDown = ({ user }: AuthDropDownProps) => {
 
         {/* Logout */}
         <DropdownMenuItem className="group" asChild>
-          <Link href="/login" className="text-red-600">
+          <Link href="/login" onClick={handleLogout} className="text-red-600">
             <Icons.exit
               className="mr-2 size-4 text-red-600 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-95"
               aria-hidden="true"
