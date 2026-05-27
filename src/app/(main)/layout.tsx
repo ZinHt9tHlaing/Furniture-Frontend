@@ -1,11 +1,19 @@
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
+import { AuthGuard } from "@/components/auth/auth-guard";
+import { redirect } from "next/navigation";
 
-export default function MainLayout({
+export default async function MainLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+  }) {
+  const loggedIn = await AuthGuard();
+
+  if (!loggedIn) {
+    redirect("/login");
+  }
+
   return (
     <div className="flex min-h-screen flex-col overflow-hidden">
       <Header />
