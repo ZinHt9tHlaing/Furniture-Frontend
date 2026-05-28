@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import { registerSchema } from "@/schemas/authSchema";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,22 +23,32 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { PasswordInput } from "./password-input";
+import { registerSchema } from "@/schemas/authSchema";
+import { registerAction } from "@/services/actions/auth";
+import { toast } from "sonner";
 
 function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       phone: "",
-      password: "",
-      confirmPassword: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    console.log("values", values);
-    // form.reset();
-    // toast.success("Successfully Logged In.");
+  const { isSubmitting } = form.formState;
+
+  const onSubmit = async (values: z.infer<typeof registerSchema>) => {
+    const result = await registerAction(values);
+    if (!result.success) {
+      toast.error(result.error);
+      return;
+    }
+
+    form.reset();
+    toast.success(result.data?.message);
+    router.push("/register/otp");
   };
 
   return (
@@ -80,74 +90,22 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                   </Field>
                 )}
               />
-
-              {/* password */}
-              <Controller
-                name="password"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field
-                    data-invalid={fieldState.invalid}
-                    className="space-y-1"
-                  >
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <PasswordInput
-                      id="password"
-                      aria-invalid={fieldState.invalid}
-                      inputMode="numeric" // show numeric keyboard on mobile
-                      placeholder="*********"
-                      autoComplete="off"
-                      {...field}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-
-              {/* confirm password */}
-              <Controller
-                name="confirmPassword"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field
-                    data-invalid={fieldState.invalid}
-                    className="space-y-1"
-                  >
-                    <FieldLabel htmlFor="confirmPassword">
-                      Confirm Password
-                    </FieldLabel>
-                    <PasswordInput
-                      id="password"
-                      aria-invalid={fieldState.invalid}
-                      inputMode="numeric" // show numeric keyboard on mobile
-                      placeholder="*********"
-                      autoComplete="off"
-                      {...field}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
             </FieldGroup>
 
             <div className="grid gap-4">
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="mt-4 w-full cursor-pointer duration-200 active:ring-1 active:ring-gray-500"
               >
-                {/* {submitting ? (
-                      <>
-                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                        <span className="animate-pulse">Submitting...</span>
-                      </>
-                    ) : (
-                      "Sign Up"
-                    )} */}
-                Sign Up
+                {isSubmitting ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                    <span className="animate-pulse">Submitting...</span>
+                  </>
+                ) : (
+                  "Sign Up"
+                )}
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-background text-muted-foreground relative z-10 px-2">
@@ -179,6 +137,11 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
           </FieldDescription>
         </CardContent>
       </Card>
+      <div className="text-muted-foreground hover:[&_a]:text-primary mt-8 text-center text-xs text-balance [&_a]:underline [&_a]:underline-offset-4">
+        By clicking continue, you agree to our{" "}
+        <Link href="#">Terms of Service</Link> and{" "}
+        <Link href="#">Privacy Policy</Link>.
+      </div>
     </div>
   );
 }

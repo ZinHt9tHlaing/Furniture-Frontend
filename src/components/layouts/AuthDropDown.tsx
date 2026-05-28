@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Icons } from "../Icons";
 import { toast } from "sonner";
-import { logoutAction } from "@/services/actions";
+import { logoutAction } from "@/services/actions/auth";
 import { useRouter } from "next/navigation";
 
 interface AuthDropDownProps {

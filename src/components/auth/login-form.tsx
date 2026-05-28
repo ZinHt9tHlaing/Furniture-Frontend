@@ -25,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./password-input";
 import { toast } from "sonner";
-import { loginAction } from "@/services/actions";
+import { loginAction } from "@/services/actions/auth";
 import { useRouter } from "next/navigation";
 
 function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
@@ -50,7 +50,7 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
     }
 
     form.reset();
-    toast.success(result.data.message);
+    toast.success(result.data?.message);
     router.push("/");
   };
 
@@ -81,7 +81,6 @@ function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
                       type="tel"
                       aria-invalid={fieldState.invalid}
                       placeholder="09********"
-                      autoComplete="off"
                       {...field}
                     />
                     {fieldState.invalid && (
